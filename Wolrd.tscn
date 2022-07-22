@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/PauseController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemy/EnemyTemp.gd" type="Script" id=4]
+[ext_resource path="res://enemy/Home.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.607843, 0.607843, 0.607843, 1 )
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[node name="Wolrd" type="Spatial"]
+
+[node name="PauseController" parent="." instance=ExtResource( 3 )]
+
+[node name="Ground" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+transform = Transform( 20, 0, 0, 0, 0.2, 0, 0, 0, 20, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Ground/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground/MeshInstance/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.288347, 0, -0.957526, 0, 1, 0, 0.957526, 0, -0.288347, -12.9866, 0.929099, 0 )
+
+[node name="EnemyTemp" parent="." groups=["Enemy"] instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.6216, 1.40412, 0 )
+script = ExtResource( 4 )
+wait_time = 20
+home = [ NodePath("../Abox"), NodePath("../Abox2") ]
+
+[node name="EnemyTemp2" parent="." groups=["Enemy"] instance=ExtResource( 2 )]
+transform = Transform( 0.371481, 0, 0.92844, 0, 1, 0, -0.92844, 0, 0.371481, 16.6216, 1.40412, 4.91132 )
+script = ExtResource( 4 )
+wait_time = 10
+speed = 300
+home = [ NodePath("../Abox"), NodePath("../Abox2") ]
+
+[node name="Abox" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18127, 12.6768 )
+
+[node name="Abox2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.40121, 1.18127, -15.4155 )
