@@ -1,4 +1,4 @@
-# production ignores
+# project ignores
 roughdraft
 .app_config/
 connection/
@@ -9,6 +9,7 @@ connection/
 export.cfg
 ecport_presets.cfg
 release/
+/build/
 
 # krita ignores
 *.import
