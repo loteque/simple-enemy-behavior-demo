@@ -7,6 +7,8 @@ stages:
   - export
   - deploy
 
+#EXPORT
+
 windows:
   stage: export
   script:
@@ -48,6 +50,8 @@ web:
     paths:
       - build/web
 
+#DEPLOY
+
 pages:
   stage: deploy
   dependencies:
@@ -59,5 +63,20 @@ pages:
     paths:
       - public
   only:
-   - main
+   - develop
+   
+itch:
+  stage: deploy
+  dependencies:
+    - web
+    - linux
+    - macosx
+    - windows
+  script:
+    - butler push build/web $ITCHIO_NAME:web-stable
+    - butler push build/linux $ITCHIO_NAME:linux-stable
+    - butler push build/macosx $ITCHIO_NAME:macosx-stable
+    - butler push build/windows $ITCHIO_NAME:windows-stable
+  only:
+   - master
 
