@@ -2,7 +2,8 @@ image: barichello/godot-ci:3.3.2
 
 variables:
   EXPORT_NAME: simple-enemy-behavior-demo
-
+  ITCHIO_NAME: simple-enemy-behavior-demo-in-godot
+  
 stages:
   - export
   - deploy
