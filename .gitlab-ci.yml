@@ -79,5 +79,4 @@ itch:
     - butler push build/macosx $ITCHIO_NAME:macosx-stable
     - butler push build/windows $ITCHIO_NAME:windows-stable
   only:
-   - master
-
+   - main
